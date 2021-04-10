@@ -3,14 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 		<title>Title</title>
-
 		<link rel="stylesheet" href="reveal.js/dist/reset.css">
 		<link rel="stylesheet" href="reveal.js/dist/reveal.css">
 		<link rel="stylesheet" href="reveal.js/dist/theme/night.css" id="theme">
 		<link rel="stylesheet" href="reveal.js/dist/user.css">
-
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
 	</head>
@@ -33,154 +30,153 @@
 						<p>A Linux path</p>
 						<pre>
 							<code class="bash" data-trim data-noescape>
-								/home/bastian/secret_files/cat_videos.mkv
-								^__________________________________________root
-								 ^^^^______________________________________directory
-								     ^_____________________________________separator
-								      ^^^^^^^______________________________directory
-								             ^_____________________________separator
-								              ^^^^^^^^^^^^_________________directory
-								                          ^________________separator
-								                           ^^^^^^^^^^^^^^^^file
+							/home/bastian/secret_files/cat_videos.mkv
+							^__________________________________________root
+							 ^^^^______________________________________directory
+							     ^_____________________________________separator
+							      ^^^^^^^______________________________directory
+							             ^_____________________________separator
+							              ^^^^^^^^^^^^_________________directory
+							                          ^________________separator
+							                           ^^^^^^^^^^^^^^^^file
 							</code>
 						</pre>
 					</section>
 				</section>
 				<section>
+					<p>Coreutils to get info on files</p>
+					<ul>
+						<li><code class="monokai-red">ls&nbsp;&nbsp;</code>: List files and directories</li>
+						<li><code class="monokai-red">stat</code>: Detailed info on files and directories</li>
+					</ul>
+				</section>
+				<section>
+					<iframe class="stretch" data-src="https://tmate.io/t/bschiffthaler/public"></iframe>
+				</section>
+				<section>
+					<p>(Re)Moving and changing file permissions</p>
+					<ul>
+						<li><code class="monokai-red">rm&nbsp;&nbsp;&nbsp;</code>: Remove files and directories</li>
+						<li><code class="monokai-red">mv&nbsp;&nbsp;&nbsp;</code>: Move files and directories</li>
+						<li><code class="monokai-red">chmod</code>: Change permissions</li>
+					</ul>
+				</section>
+				<section>
+					<iframe class="stretch" data-src="https://tmate.io/t/bschiffthaler/public"></iframe>
+				</section>
+				<section>
+					<p>The <code>ls</code> command</p>
+					<pre>
+						<code class="bash" data-trim data-noescape>
+						ls -l -A --color=auto /data/week1
+						</code>
+						<code class="bash" data-trim data-noescape>
+						total 5732
+						-rw-rw-rw- 1 root root  126284 May  4 20:48 cacoa.tsv
+						-rw-rw-rw- 1 root root 5696587 May  4 20:48 movies.tsv
+						-rw-rw-rw- 1 root root   44801 May  4 20:48 pokemon.tsv
+						</code>
+					</pre>
+				</section>
+				<section>
+					<iframe class="stretch" data-src="https://tmate.io/t/bschiffthaler/public"></iframe>
+				</section>
+				<section>
+					<p>Special path aliases</p>
+				</section>
+				<section>
+					<p>Try</p>
+					<pre>
+						<code class="bash" data-trim data-noescape>
+						# Print working directory
+						pwd
+						# List some directories
+						ls -la ~
+						ls -la ~admin
+						ls -la .
+						ls -la ..
+						# Change working directory
+						cd /data/week1
+						# List some more
+						ls -la .
+						ls -la ..
+						</code>
+					</pre>
+				</section>
+				<section>
+					<p>The permission bits</p>
+					<pre>
+						<code class="html" data-trim data-noescape>
+						- rw- rw- rw-
+						^_________________ File type (-,d,l)
+						  ^^^_____________ Permissions for the user who owns this
+						      ^^^_________ Permissions for the group members
+						          ^^^_____ Permissions for everyone else
+						</code>
+					</pre>
+				</section>
+				<section>
+					<ul>
+						<li><code class="emph monokai-red">r</code>: Can read the contents of the file, can make copies of the file</li>
+						<li><code class="emph monokai-red">w</code>: Can modify/overwrite/delete the file</li>
+						<li><code class="emph monokai-red">x</code>: Can execute the file/script if it's a program. Can <code>cd</code> to directory</li>
+					</ul>
+				</section>
+				<section>
+					<p>Changing permissions (if you own the file)</p>
+					<pre>
+						<code class="bash" data-trim data-noescape>
+						# Give file owner all permissions
+						chmod u+rwx &#60;file&#62;
+						</code>
+						<code class="bash" data-trim data-noescape>
+						# Remove all permissions from group members and others
+						chmod go-rwx &#60;file&#62;
+						</code>
+					</pre>
+				</section>
+				<section>
+					<p>The <code>cp</code> command</p>
+					<pre>
+						<code class="bash" data-trim data-noescape>
+						cp &#60;source&#62; &#60;destination&#62;
+						</code>
+					</pre>
+				</section>
+				<section>
 					<section>
-						<p>Coreutils to get info on files</p>
+						<p>Links</p>
+						<p>Links refer to existing data like files and directories without making copies. There are two main types</p>
 						<ul>
-							<li><code class="monokai-red">ls&nbsp;&nbsp;</code>: List files and directories</li>
-							<li><code class="monokai-red">stat</code>: Detailed info on files and directories</li>
+							<li class="fragment">Hard links point to data directly</li>
+							<li class="fragment">Symbolic links point to file name</li>
 						</ul>
-					</section>
-					<section>
-						<iframe class="stretch" data-src="https://tmate.io/t/bschiffthaler/public"></iframe>
-					</section>
-					<section>
-						<p>(Re)Moving and changing file permissions</p>
-						<ul>
-							<li><code class="monokai-red">rm&nbsp;&nbsp;&nbsp;</code>: Remove files and directories</li>
-							<li><code class="monokai-red">mv&nbsp;&nbsp;&nbsp;</code>: Move files and directories</li>
-							<li><code class="monokai-red">chmod</code>: Change permissions</li>
-						</ul>
-					</section>
-					<section>
-						<iframe class="stretch" data-src="https://tmate.io/t/bschiffthaler/public"></iframe>
-					</section>
-					<section>
-						<p>The <code>ls</code> command</p>
-						<pre>
-							<code class="bash" data-trim data-noescape>
-								ls -l -A --color=auto /data/week1
-							</code>
-							<code class="bash" data-trim data-noescape>
-								total 5732
-								-rw-rw-rw- 1 root root  126284 May  4 20:48 cacoa.tsv
-								-rw-rw-rw- 1 root root 5696587 May  4 20:48 movies.tsv
-								-rw-rw-rw- 1 root root   44801 May  4 20:48 pokemon.tsv
-							</code>
-						</pre>
-					</section>
-					<section>
-						<iframe class="stretch" data-src="https://tmate.io/t/bschiffthaler/public"></iframe>
-					</section>
-					<section>
-						<p>Special path aliases</p>
-					</section>
-					<section>
-						<p>Try</p>
-						<pre>
-							<code class="bash" data-trim data-noescape>
-								# Print working directory
-								pwd
-								# List some directories
-								ls -la ~
-								ls -la ~admin
-								ls -la .
-								ls -la ..
-								# Change working directory
-								cd /data/week1
-								# List some more
-								ls -la .
-								ls -la ..
-							</code>
-						</pre>
-					</section>
-					<section>
-						<p>The permission bits</p>
-						<pre>
-							<code class="html" data-trim data-noescape>
-								- rw- rw- rw-
-								^_________________ File type (-,d,l)
-								  ^^^_____________ Permissions for the user who owns this
-								      ^^^_________ Permissions for the group members
-								          ^^^_____ Permissions for everyone else
-							</code>
-						</pre>
-					</section>
-					<section>
-						<ul>
-							<li><code class="emph monokai-red">r</code>: Can read the contents of the file, can make copies of the file</li>
-							<li><code class="emph monokai-red">w</code>: Can modify/overwrite/delete the file</li>
-							<li><code class="emph monokai-red">x</code>: Can execute the file/script if it's a program. Can <code>cd</code> to directory</li>
-						</ul>
-					</section>
-					<section>
-						<p>Changing permissions (if you own the file)</p>
-						<pre>
-							<code class="bash" data-trim data-noescape>
-								# Give file owner all permissions
-								chmod u+rwx &#60;file&#62;
-							</code>
-							<code class="bash" data-trim data-noescape>
-								# Remove all permissions from group members and others
-								chmod go-rwx &#60;file&#62;
-							</code>
-						</pre>
-					</section>
-					<section>
-						<p>The <code>cp</code> command</p>
-						<pre>
-							<code class="bash" data-trim data-noescape>
-								cp &#60;source&#62; &#60;destination&#62;
-							</code>
-						</pre>
-					</section>
-					<section>
-						<section>
-							<p>Links</p>
-							<ul>
-								<li class="fragment">Hard links point to data</li>
-								<li class="fragment">Symbolic links point to file name</li>
-							</ul>
-						</section>
-						<section>
-							XXXlink images
-						</section>
-					</section>
-					<section>
-						<p>The <code class="monokai-red">sudo</code> command.</p>
-						<p>Administrators can use this command to elevate their permissions. This allows them to change anything on a system.</p>
-						<pre>
-							<code class="bash" data-trim data-noescape>
-								# > Permission denied
-								rm not_my_file.txt
-								# > Permission granted
-								sudo rm not_my_file.txt
-							</code>
-						</pre>
 					</section>
 					<section data-background="white">
-						<img class="stretch" data-src="https://imgs.xkcd.com/comics/sandwich.png"></img>
+						<p>Link schematic</p>
+						<object type="image/svg+xml" class=stretch data="https://mermaid.ink/svg/eyJjb2RlIjoiZ3JhcGggTFJcbiAgICBhW0ZpcnN0LnR4dF0gLS1oYXJkLS0-IGJbSW5vZGVdXG4gICAgY1tTZWNvbmQudHh0XSAtLWhhcmQtLT4gYlxuICAgIGVbVGhpcmQudHh0XSAtLXN5bWJvbGljLS0-IGNcbiAgICBzdWJncmFwaCBJbnRlcm5hbCBsb3cgbGV2ZWxcbiAgICAgIGIgLS0-IGZbRGF0YV1cbiAgICBlbmQiLCJtZXJtYWlkIjp7fSwidXBkYXRlRWRpdG9yIjpmYWxzZX0"></object>
 					</section>
 				</section>
 				<section>
-						<iframe class='stretch' allowfullscreen='true' allowtransparency='true' frameborder='0' data-src='https://www.mentimeter.com/embed/031e2ab4d88bb6cfef2e72638ad7079c/cd122c34d866'></iframe>
+					<p>The <code class="monokai-red">sudo</code> command.</p>
+					<p>Administrators can use this command to elevate their permissions. This allows them to change anything on a system.</p>
+					<pre>
+						<code class="bash" data-trim data-noescape>
+						# > Permission denied
+						rm not_my_file.txt
+						# > Permission granted
+						sudo rm not_my_file.txt
+						</code>
+					</pre>
+				</section>
+				<section data-background="white">
+					<img class="stretch" data-src="https://imgs.xkcd.com/comics/sandwich.png"></img>
+				</section>
+				<section>
+					<iframe class='stretch' allowfullscreen='true' allowtransparency='true' frameborder='0' data-src='https://www.mentimeter.com/embed/031e2ab4d88bb6cfef2e72638ad7079c/cd122c34d866'></iframe>
 				</section>
 			</div>
 		</div>
-
 		<script src="reveal.js/dist/reveal.js"></script>
 		<script src="reveal.js/plugin/notes/notes.js"></script>
 		<script src="reveal.js/plugin/markdown/markdown.js"></script>
@@ -194,7 +190,6 @@
 				hash: true,
 				width: 1280,
 				height: 720,
-
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ]
 			});

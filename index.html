@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<title>Title</title>
+		<title>Filesystem</title>
 		<link rel="stylesheet" href="reveal.js/dist/reset.css">
 		<link rel="stylesheet" href="reveal.js/dist/reveal.css">
 		<link rel="stylesheet" href="reveal.js/dist/theme/night.css" id="theme">
@@ -16,14 +16,12 @@
 			<div class="slides">
 				<!-- Title slide -->
 				<section>
-					<h4>The file system</h4>
+					<h1>The file system</h1>
 					<p>...and other small annoyances</p>
 				</section>
 				<section>
-					<section>
-						<p>File system layout</p>
-					</section>
 					<section data-background="white">
+						<p>File system layout - a directed acyclic graph</p>
 						<img class="stretch" data-src="img/fs-layout.png">
 					</section>
 					<section>
@@ -46,19 +44,83 @@
 				<section>
 					<p>Coreutils to get info on files</p>
 					<ul>
+						<li><code class="monokai-red">file</code>: Get most basic info about a file</li>
 						<li><code class="monokai-red">ls&nbsp;&nbsp;</code>: List files and directories</li>
 						<li><code class="monokai-red">stat</code>: Detailed info on files and directories</li>
+						<li><code class="monokai-red">find</code>: Find files and directories</li>
+						<li><code class="monokai-red">grep</code>: Find pattern within text files</li>
 					</ul>
 				</section>
 				<section>
 					<iframe class="stretch" data-src="https://tmate.io/t/bschiffthaler/public"></iframe>
 				</section>
 				<section>
-					<p>(Re)Moving and changing file permissions</p>
+					<p>Special path aliases</p>
+					<pre>
+						<code class="bash" data-trim data-noescape>
+						# Print working directory
+						pwd
+						# List some directories
+						ls -la ~
+						ls -la ~admin
+						ls -la .
+						ls -la ..
+						# Change working directory
+						cd /data/week1
+						# List some more
+						ls -la .
+						ls -la ..
+						</code>
+					</pre>
+				</section>
+				<section>
+					<iframe class="stretch" data-src="https://tmate.io/t/bschiffthaler/public"></iframe>
+				</section>
+				<section>
+					<p>Reading file content</p>
+					<ul>
+						<li><code class="monokai-red">less</code>: Opens a paginated featureful reader (quit by pressing "q") </li>
+						<li><code class="monokai-red">head</code>: Print the first N (default 10) lines </li>
+						<li><code class="monokai-red">tail</code>: Print the last N (default 10) lines</li>
+						<li><code class="monokai-red">cat&nbsp;</code>: Dumps contents to terminal</li>
+					</ul>
+				</section>
+				<section>
+					<iframe class="stretch" data-src="https://tmate.io/t/bschiffthaler/public"></iframe>
+				</section>
+				<section>
+					<p>(Re)Moving and changing files</p>
 					<ul>
 						<li><code class="monokai-red">rm&nbsp;&nbsp;&nbsp;</code>: Remove files and directories</li>
+						<li><code class="monokai-red">rmdir</code>: Remove (empty) directories</li>
 						<li><code class="monokai-red">mv&nbsp;&nbsp;&nbsp;</code>: Move files and directories</li>
-						<li><code class="monokai-red">chmod</code>: Change permissions</li>
+					</ul>
+				</section>
+				<section>
+					<iframe class="stretch" data-src="https://tmate.io/t/bschiffthaler/public"></iframe>
+				</section>
+				<section>
+					<section>
+						<p>Absolute vs. relative paths</p>
+					</section>
+				</section>
+				<section>
+					<p>Downloading from the internet</p>
+					<ul>
+						<li><code class="monokai-red">wget</code>: Simpler to use, but not ubiquitous</li>
+						<li><code class="monokai-red">curl</code>: Incredibly feature-rich, but complex</li>
+					</ul>
+				</section>
+				<section>
+					<iframe class="stretch" data-src="https://tmate.io/t/bschiffthaler/public"></iframe>
+				</section>
+				<section>
+					<p>Archives and compression</p>
+					<ul>
+						<li><code class="monokai-red">tar&nbsp;&nbsp;</code>: No compression, just "zips" files and directories into one archive. Usually additionally compressed with other program (see below)</li>
+						<li><code class="monokai-red">gzip&nbsp;</code>: Good compression, fast. <code class="monokai-red">.gz</code></li>
+						<li><code class="monokai-red">bzip2</code>: Great compression, slow. Safe.<code class="monokai-red">.bz2</code></li>
+						<li><code class="monokai-red">xz&nbsp;&nbsp;&nbsp;</code>: Best compression, medium speed. Unsafe<code class="monokai-red">.xz</code></li>
 					</ul>
 				</section>
 				<section>
@@ -80,28 +142,6 @@
 				</section>
 				<section>
 					<iframe class="stretch" data-src="https://tmate.io/t/bschiffthaler/public"></iframe>
-				</section>
-				<section>
-					<p>Special path aliases</p>
-				</section>
-				<section>
-					<p>Try</p>
-					<pre>
-						<code class="bash" data-trim data-noescape>
-						# Print working directory
-						pwd
-						# List some directories
-						ls -la ~
-						ls -la ~admin
-						ls -la .
-						ls -la ..
-						# Change working directory
-						cd /data/week1
-						# List some more
-						ls -la .
-						ls -la ..
-						</code>
-					</pre>
 				</section>
 				<section>
 					<p>The permission bits</p>
@@ -136,12 +176,15 @@
 					</pre>
 				</section>
 				<section>
-					<p>The <code>cp</code> command</p>
-					<pre>
-						<code class="bash" data-trim data-noescape>
-						cp &#60;source&#62; &#60;destination&#62;
-						</code>
-					</pre>
+					<p>Copies and links</p>
+					<ul>
+						<li><code class="monokai-red">cp&nbsp;&nbsp;&nbsp;</code>: Copies files and directories. Duplicates all data</li>
+						<li><code class="monokai-red">ln&nbsp;&nbsp;&nbsp;</code>: Creates a hard link to files and directories. Appears like a copy, but does not duplicate data</li>
+						<li><code class="monokai-red">ln -s</code>: Creates a soft link. Appears as a link (transparent). Does not duplicate data.</li>
+					</ul>
+				</section>
+				<section>
+					<iframe class="stretch" data-src="https://tmate.io/t/bschiffthaler/public"></iframe>
 				</section>
 				<section>
 					<section>
